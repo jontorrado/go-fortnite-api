@@ -1,6 +1,7 @@
 package main
 
 import (
+	"app/helper"
 	"encoding/json"
 	"log"
 	"net/http"
@@ -9,7 +10,7 @@ import (
 )
 
 func GetWeapons(w http.ResponseWriter, r *http.Request) {
-	weapons := LoadWeaponsCsv()
+	weapons := helper.LoadWeaponsCsv()
 	json.NewEncoder(w).Encode(weapons)
 }
 

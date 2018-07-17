@@ -1,6 +1,7 @@
-package main
+package helper
 
 import (
+	"app/model"
 	"bufio"
 	"encoding/csv"
 	"fmt"
@@ -10,11 +11,13 @@ import (
 	"strconv"
 )
 
-func LoadWeaponsCsv() []Weapon {
-  var weapons []Weapon
+func LoadWeaponsCsv() []model.Weapon {
+	var weapons []model.Weapon
 
 	//Name,Rarity,Fire Rate,Mag Size,Reload Time,Multiplier,Damage (Body),Damage (Head),Fall Off,DPS (Body),DPS (Head),Shots/Kill Avg (Body),Shots/Kill Avg (Head)
-	csvFile, _ := os.Open("fortnite-weapons.csv")
+	pwd, _ := os.Getwd()
+	csvFile, _ := os.Open(pwd + "/database/fortnite-weapons.csv")
+	println(pwd + "/../../database/fortnite-weapons.csv")
 	reader := csv.NewReader(bufio.NewReader(csvFile))
 	for {
 		line, error := reader.Read()
@@ -38,7 +41,7 @@ func LoadWeaponsCsv() []Weapon {
 			os.Exit(2)
 		}
 
-		weapons = append(weapons, Weapon{
+		weapons = append(weapons, model.Weapon{
 			Name:             line[0],
 			Rarity:           line[1],
 			FireRate:         fireRate,
@@ -55,5 +58,5 @@ func LoadWeaponsCsv() []Weapon {
 		})
 	}
 
-  return weapons
+	return weapons
 }

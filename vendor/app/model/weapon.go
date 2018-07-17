@@ -1,4 +1,4 @@
-package main
+package model
 
 type Weapon struct {
 	Name             string  `json:"name,omitempty"`
